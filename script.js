@@ -57,15 +57,23 @@ let polygonShape = [
 //     map.add(graphicsLayer)
 // })
 
-
-
 // Your access token can be found at: https://cesium.com/ion/tokens.
 Cesium.Ion.defaultAccessToken =
     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIxYmZmZjRhOS0xOWY0LTRjYzktYmZlZi1iNThhYjBkZmNhOTgiLCJpZCI6MzQ3MTIsImlhdCI6MTYwMDc1MDU0NX0.9fdavjbtosrwu_RvkQVyJXZacHHIwnoqiFMAeZ2K2PM'
 // Initialize the Cesium Viewer in the HTML element with the `cesiumContainer` ID.
-const viewer = new Cesium.Viewer('cesiumContainer', {
+const viewer = new Cesium.Viewer('globe', {
     terrainProvider: Cesium.createWorldTerrain(),
+    infoBox: false,
+    timeline: false,
+    animation: false,
 })
-// Add Cesium OSM Buildings, a global 3D buildings layer.
 
-})
+viewer.dataSources.add(
+    Cesium.GeoJsonDataSource.load('./AUS.geo.json', {
+        stroke: Cesium.Color.HOTPINK,
+        fill: Cesium.Color.PINK,
+        strokeWidth: 10,
+        markerSymbol: '?',
+        clampToGround: true,
+    })
+)
