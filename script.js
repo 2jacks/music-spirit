@@ -8,7 +8,7 @@ firebase.initializeApp({
     appId: '1:651888268658:web:716c0877472fcbcdf379eb',
 })
 
-// 2jdesk
+// 2jlap
 
 firebase
     .database()
