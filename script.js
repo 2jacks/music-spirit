@@ -7,7 +7,9 @@ firebase.initializeApp({
     messagingSenderId: '651888268658',
     appId: '1:651888268658:web:716c0877472fcbcdf379eb',
 })
+
 // 2jdesk
+
 firebase
     .database()
     .ref('features/')
