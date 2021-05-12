@@ -1,16 +1,22 @@
-let polygonShape = [
-    [-69.882232666015625, 12.411109924316406],
-    [-69.874862670898438, 12.415276527404785],
-    [-69.88555908203125, 12.45777702331543],
-    [-69.891403198242188, 12.472221374511719],
-    [-69.896957397460938, 12.480833053588867],
-    [-69.932235717773438, 12.528055191040039],
-    [-70.033195495605469, 12.618331909179688],
-    [-70.059661865234375, 12.627776145935059],
-    [-70.059036254882813, 12.540207862854004],
-    [-69.946945190429688, 12.436665534973145],
-    [-69.882232666015625, 12.411109924316406],
-]
+firebase.initializeApp({
+    apiKey: 'AIzaSyDXO0kw7T1D484XWaVBDgGkibnwg7ZWuQ0',
+    authDomain: 'music-spirit.firebaseapp.com',
+    databaseURL: 'https://music-spirit-default-rtdb.firebaseio.com',
+    projectId: 'music-spirit',
+    storageBucket: 'music-spirit.appspot.com',
+    messagingSenderId: '651888268658',
+    appId: '1:651888268658:web:716c0877472fcbcdf379eb',
+})
+
+// 2jdesk
+
+firebase
+    .database()
+    .ref('features/')
+    .once('value', (snapshot) => {
+        const data = snapshot.val()
+        console.log(data)
+    })
 
 // require([
 //     'esri/Map',
@@ -18,7 +24,9 @@ let polygonShape = [
 //     'esri/geometry/Polygon',
 //     'esri/Graphic',
 //     'esri/layers/GraphicsLayer',
-// ], function (Map, SceneView, Polygon, Graphic, GraphicsLayer) {
+//     'esri/layers/FeatureLayer',
+//     'esri/layers/GeoJSONLayer',
+// ], function (Map, SceneView, GraphicsLayer, FeatureLayer, GeoJSONLayer) {
 //     var map = new Map({
 //         basemap: 'topo-vector',
 //         ground: 'world-elevation',
@@ -41,39 +49,19 @@ let polygonShape = [
 //         },
 //     }
 
-//     const polygon = new Polygon({
-//         hasZ: true,
-//         hasM: true,
-//         rings: polygonShape,
-//         spatialReference: { wkid: 4326 },
+//     const geoJSONLayer = new GeoJSONLayer({
+//         url:
+//             'https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.geojson',
+//         copyright: 'USGS Earthquakes',
 //     })
 
-//     const polygonGraphic = new Graphic({
-//         geometry: polygon,
-//         symbol: simpleFillSymbol,
+//     const parcelLayer = new FeatureLayer({
+//         url:
+//             'https://services.arcgis.com/P3ePLMYs2RVChkJx/arcgis/rest/services/World_Countries_(Generalized)/FeatureServer/0',
 //     })
 
-//     graphicsLayer.add(polygonGraphic)
-//     map.add(graphicsLayer)
+//     view.on('click', (e) => {
+//         console.log(e)
+//     })
+//     map.add(parcelLayer)
 // })
-
-// Your access token can be found at: https://cesium.com/ion/tokens.
-Cesium.Ion.defaultAccessToken =
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIxYmZmZjRhOS0xOWY0LTRjYzktYmZlZi1iNThhYjBkZmNhOTgiLCJpZCI6MzQ3MTIsImlhdCI6MTYwMDc1MDU0NX0.9fdavjbtosrwu_RvkQVyJXZacHHIwnoqiFMAeZ2K2PM'
-// Initialize the Cesium Viewer in the HTML element with the `cesiumContainer` ID.
-const viewer = new Cesium.Viewer('globe', {
-    terrainProvider: Cesium.createWorldTerrain(),
-    infoBox: false,
-    timeline: false,
-    animation: false,
-})
-
-viewer.dataSources.add(
-    Cesium.GeoJsonDataSource.load('./AUS.geo.json', {
-        stroke: Cesium.Color.HOTPINK,
-        fill: Cesium.Color.PINK,
-        strokeWidth: 10,
-        markerSymbol: '?',
-        clampToGround: true,
-    })
-)
